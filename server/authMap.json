@@ -1,0 +1,25 @@
+[
+    {
+        "users": {
+            "_id": "a-read",
+            "admin": "u-read adm-update",
+            "email": "u-read"
+        }
+    },
+    
+    {
+        "posts":{
+            "postName": "g-read g-update",
+            "informações":{
+                "conteudo": "g-update g-read",
+                "autor": "g-read g-update",
+                "alterações":[
+                    {"data": "g-read g-update g-delete g-create"}
+                ],
+                "alterações_auth":"g-create g-delete"
+            },
+            "informações_auth":"g-create g-delete"
+        },
+        "posts_auth": "a-create g-delete"
+    }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "url": "",
+    "template":"template.html",
+    "files":{
+      "body": "home.html"
+    },
+    "redirect": true
+  },
+  {
+    "url": "login",
+    "template":"template.html",
+    "files":{
+      "body": "login/login.html",
+      "css": "login/login.css",
+      "js": "login/login.js"
+    },
+    "redirect": true
+  },
+  {
+    "url": "",
+    "template":"user/template.html",
+    "files":{
+      "body": "user/user.html",
+      "js": "user/user.js"
+    },
+    "auth": true
+  },
+  {
+    "url": "404",
+    "template":"template.html",
+    "files":{
+      "body": "error404.html"
+    }
+  }
+]
