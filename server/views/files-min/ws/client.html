@@ -1,0 +1,71 @@
+{{define "head"}}{{end}}
+
+{{define "body"}}
+
+    <div id="container"></div>
+    <video id="video" width="400" height="300" autoplay></video>
+    <canvas id="canvas" width="400" height="300" autoplay></canvas>
+
+    <script>
+
+        var fps = 23.9;
+
+        var  ws = initWS();
+        var teste = JSON.stringify({
+            resposta: "iniciando streaming"
+        });
+        var stream = false;
+
+        function initWS() {
+            var socket = new WebSocket("ws://localhost:8080/ws/client/teste&newClient");
+            socket.onopen = function() {
+                alert("Socket is open");
+            };
+            socket.onmessage = function (e) {
+                var json = JSON.parse(e.data);
+                if (json.start == true && stream == false){
+                    stream = true;
+                    start();
+                    alert("iniciando stream");
+                }
+            }
+
+            return socket;
+        }
+
+        
+
+        function start(){
+            //Init the video
+            var video = document.getElementById('video'),
+                vendorUrl = window.URL || window.webkitURl,
+                canvas =document.getElementById('canvas'),
+                context = canvas.getContext('2d');
+
+            // Capture video
+            navigator.getMedia = navigator.getUserMedia ||
+                                 navigator.webkitGetUserMedia||
+                                 navigator.mozGetUserMedia||
+                                 navigator.msGetUserMedia;
+
+            navigator.getMedia({
+                video:true,
+                audio:false
+            }, function(stream){
+                video.src = vendorUrl.createObjectURL(stream);
+                video.play();
+                draw(video,context,400,300);
+            }, function(error){
+                //An error occurred
+                //error.code
+            })
+        }
+
+        function draw(video,context,w,h){
+            context.drawImage(video,0,0,w,h);
+            ws.send(canvas.toDataURL('img/webp'));
+            setTimeout(draw,1000/fps,video,context,w,h);
+        }
+
+    </script>
+{{end}}

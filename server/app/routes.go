@@ -22,6 +22,9 @@ func NewRouter() *mux.Router {
 		Route{"Clientbsocket", "GET", "/ws/client/{rest:.*}", controller.StartClientWebsocket},
 		Route{"UserWebsocket", "GET", "/ws/user/{rest:.*}", controller.StartUserWebsocket},
 
+		//Open clients in websocket for a user
+		Route{"GetWsClients", "GET", "/api/getwsclients", controller.GetClients},
+
 		//views manager
 		Route{"Index", "GET", "/", controller.Views},
 		Route{"Views", "GET", "/{rest:.*}", controller.Views},

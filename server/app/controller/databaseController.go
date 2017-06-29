@@ -172,6 +172,7 @@ func (c *Client) startLoop(call userCall, messages chan []interface{}, nLoops ch
 				oldResp = resp
 				messages <- resp
 			}
+			time.Sleep(time.Millisecond * 100)
 		}
 	}
 }

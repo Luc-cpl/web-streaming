@@ -1,36 +1,51 @@
 [
-  {
-    "url": "",
-    "template":"template.html",
-    "files":{
-      "body": "home.html"
+    {
+      "url": "",
+      "template":"template.html",
+      "files":{
+        "body": "home.html"
+      },
+      "redirect": true
     },
-    "redirect": true
-  },
-  {
-    "url": "login",
-    "template":"template.html",
-    "files":{
-      "body": "login/login.html",
-      "css": "login/login.css",
-      "js": "login/login.js"
+    {
+      "url": "login",
+      "template":"template.html",
+      "files":{
+        "body": "login/login.html",
+        "css": "login/login.css",
+        "js": "login/login.js"
+      },
+      "redirect": true
     },
-    "redirect": true
-  },
-  {
-    "url": "",
-    "template":"user/template.html",
-    "files":{
-      "body": "user/user.html",
-      "js": "user/user.js"
+    {
+      "url": "",
+      "template":"user/template.html",
+      "files":{
+        "body": "user/user.html",
+        "js": "user/user.js"
+      },
+      "auth": true
     },
-    "auth": true
-  },
-  {
-    "url": "404",
-    "template":"template.html",
-    "files":{
-      "body": "error404.html"
+    {
+      "url": "404",
+      "template":"template.html",
+      "files":{
+        "body": "error404.html"
+      }
+    },
+    {
+      "url": "testeclient",
+      "template":"template.html",
+      "files":{
+        "body": "ws/client.html"
+      }
+    },
+    {
+      "url": "testeuser",
+      "template":"template.html",
+      "files":{
+        "body": "ws/user.html"
+      }
     }
-  }
+
 ]

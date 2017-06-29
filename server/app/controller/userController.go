@@ -35,10 +35,10 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	} else if encoded, err := Cookie.Encode("session", user); err == nil {
 		cookie := &http.Cookie{
-			Name:   "session",
-			Value:  encoded,
-			Path:   "/",
-			MaxAge: 1800, //duração do cookie
+			Name:  "session",
+			Value: encoded,
+			Path:  "/",
+			//MaxAge: 1800, //duração do cookie
 		}
 		http.SetCookie(w, cookie)
 		response.Login = true
@@ -72,8 +72,6 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 
 //ChangeIdentityValue receive a new identity value, checks if exist and changes the old value to the new one
 func ChangeIdentityValue(w http.ResponseWriter, r *http.Request) {
-	newSession := mgoS.DB.Session.Copy()
-	defer newSession.Close()
 	user := GetUser(r)
 	newValue := r.PostFormValue(mgoS.DB.UserIdentityValue)
 
@@ -81,6 +79,8 @@ func ChangeIdentityValue(w http.ResponseWriter, r *http.Request) {
 	var checkInterface interface{}
 	err := json.Unmarshal(checkByt, &checkInterface)
 
+	newSession := mgoS.DB.Session.Copy()
+	defer newSession.Close()
 	n, err := newSession.DB(mgoS.DB.Database).C("users").Find(checkInterface).Count()
 
 	if err != nil {
@@ -116,8 +116,6 @@ func ChangeIdentityValue(w http.ResponseWriter, r *http.Request) {
 
 //ChangePassword receive a new identity value, checks if exist and changes the old value to the new one
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
-	newSession := mgoS.DB.Session.Copy()
-	defer newSession.Close()
 	user := GetUser(r)
 	newPass := r.PostFormValue("password")
 	oldPassword := r.PostFormValue("oldPassword")

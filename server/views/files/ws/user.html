@@ -1,0 +1,35 @@
+{{define "head"}}
+
+    <script>
+        var  ws = initWS();
+        var container = $("#container");
+        var teste = JSON.stringify({
+            start: true
+        });
+
+        function initWS() {
+            var socket = new WebSocket("ws://localhost:8080/ws/user/newClient");
+            socket.onopen = function() {
+                alert("Socket is open");
+                ws.send(teste);
+                container.append("<p>Socket is open</p>");
+            };
+            socket.onmessage = function (e) {
+                //alert(e.data);
+                container.append(e.data);
+            }
+            socket.onclose = function () {
+                alert("Socket is open");
+                container.append("<p>Socket closed</p>");
+            }
+            return socket;
+        }
+    </script>
+
+{{end}}
+
+{{define "body"}}
+    <div id="container">inicio</div>
+
+{{end}}
+
